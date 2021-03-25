@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="328.0" prefWidth="507.0" style="-fx-background-radius: 20; -fx-background-color: linear-gradient(from 25% 25% to 100% 100%, #535463, #878AA3);" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.PixelatorController">
+    <top>
+        <Button fx:id="buttonClose" mnemonicParsing="false" onAction="#handleClose" style="-fx-background-color: transparent;  -fx-border-color: #ffecbd; -fx-border-radius: 10;" text="X" textFill="#ffebcd" BorderPane.alignment="CENTER_RIGHT">
+            <BorderPane.margin>
+                <Insets right="15.0" top="10.0" />
+            </BorderPane.margin>
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor>
+            <font>
+                <Font name="System Bold" size="12.0" />
+            </font>
+        </Button>
+    </top>
+    <left>
+        <ImageView fitHeight="155.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+            <BorderPane.margin>
+                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+            </BorderPane.margin>
+        </ImageView>
+    </left>
+    <right>
+        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+            <BorderPane.margin>
+                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+            </BorderPane.margin>
+        </ImageView>
+    </right>
+</BorderPane>
