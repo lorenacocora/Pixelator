@@ -1,4 +1,4 @@
-import Controllers.PixelatorExecutor;
+import ThreadExcutioner.Executor;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -15,7 +15,7 @@ public class Main {
         }
 
         try {
-            new PixelatorExecutor(result, 10).pixelate();
+            new Executor(result, 10);
         } catch (Exception e) {
             e.printStackTrace();
         }

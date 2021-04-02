@@ -8,19 +8,23 @@ import java.awt.image.Raster;
 import java.io.File;
 import java.io.IOException;
 
-public class PixelatorExecutor {
+public class PixelatorExecutor extends Thread {
     private final BufferedImage image;
     private final int totalSections;
+    private int sectionWidth;
+    private int sectionHeight;
+    private int[][][] sections;
 
-    public PixelatorExecutor(BufferedImage image, int sections) {
+    public PixelatorExecutor(BufferedImage image, int sections) throws InterruptedException {
        this.image = image;
        this.totalSections = sections;
+       pixelate();
     }
 
-    public void pixelate() throws InterruptedException, IOException {
-        int sectionWidth = image.getWidth() / totalSections;
-        int sectionHeight = image.getHeight() / totalSections;
-        int[][][] sections = new int[totalSections][totalSections][3];
+    public void pixelate() throws InterruptedException {
+        sectionWidth = image.getWidth() / totalSections;
+        sectionHeight = image.getHeight() / totalSections;
+        sections = new int[totalSections][totalSections][3];
         int cores = Runtime.getRuntime().availableProcessors();
         PixelatorThread[] threads = new PixelatorThread[cores];
 
@@ -31,23 +35,25 @@ public class PixelatorExecutor {
         }
 
         // Wait for all threads to finish
-        for (int i = 0; i < threads.length; i++) {
-            threads[i].join();
+        for (PixelatorThread thread : threads) {
+            thread.join();
         }
+    }
 
-        // Create the new image to show the result
-        BufferedImage newImage = new BufferedImage(image.getWidth(), image.getHeight(), ColorSpace.TYPE_RGB);
+    //Getters
+    public int getTotalSections(){
+        return totalSections;
+    }
 
-        // Go through the pixels and set the color the same as the corresponding section
-        for (int x = 0; x < image.getWidth(); x++) {
-            for (int y = 0; y < image.getHeight(); y++) {
-                int sectionX = Math.min(x / sectionWidth, totalSections - 1);
-                int sectionY = Math.min(y / sectionHeight, totalSections - 1);
-                Color color = new Color(sections[sectionY][sectionX][0], sections[sectionY][sectionX][1], sections[sectionY][sectionX][2]);
-                newImage.setRGB(x, y, color.getRGB());
-            }
-        }
-        File outputFile = new File("image-out.jpg");
-        ImageIO.write(newImage, "jpg", outputFile);
+    public int getSectionWidth(){
+        return sectionWidth;
+    }
+
+    public int getSectionHeight(){
+        return sectionHeight;
+    }
+
+    public int[][][] getSections(){
+        return sections;
     }
 }
