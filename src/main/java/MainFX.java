@@ -15,7 +15,7 @@ public class MainFX extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        FXMLLoader loader = new FXMLLoader();
+        FXMLLoader loader =new FXMLLoader();
         loader.setLocation(getClass().getResource("/FXMLFiles/pixelator.fxml"));
         Parent root = loader.load();
 
@@ -38,7 +38,7 @@ public class MainFX extends Application {
         });
 
         stage.initStyle(StageStyle.TRANSPARENT);
-        Scene scene = new Scene(root, 700, 500);
+        Scene scene = new Scene(root, 700,500);
         scene.setFill(Color.TRANSPARENT);
         stage.setScene((scene));
         stage.show();

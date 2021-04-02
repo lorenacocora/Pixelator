@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <?import javafx.geometry.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
@@ -6,7 +7,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="328.0" prefWidth="507.0" style="-fx-background-radius: 20; -fx-background-color: linear-gradient(from 25% 25% to 100% 100%, #535463, #878AA3);" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.PixelatorController">
+<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" style="-fx-background-radius: 20; -fx-background-color: #4B5157" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.PixelatorController">
     <top>
         <Button fx:id="buttonClose" mnemonicParsing="false" onAction="#handleClose" style="-fx-background-color: transparent;  -fx-border-color: #ffecbd; -fx-border-radius: 10;" text="X" textFill="#ffebcd" BorderPane.alignment="CENTER_RIGHT">
             <BorderPane.margin>
@@ -20,18 +21,81 @@
             </font>
         </Button>
     </top>
+    <bottom>
+        <VBox prefHeight="96.0" prefWidth="700.0" BorderPane.alignment="CENTER">
+            <children>
+                <ProgressBar prefHeight="0.0" prefWidth="663.0" progress="0.0">
+                    <VBox.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                    </VBox.margin>
+                </ProgressBar>
+                <Button fx:id="chooseFileButton" mnemonicParsing="false" onAction="#chooseFile" prefHeight="26.0" prefWidth="738.0" style="-fx-background-color: transparent;  -fx-border-color: #ffebcd; -fx-border-radius: 10;" text="Choose File" textFill="#ffebcd">
+                    <VBox.margin>
+                        <Insets bottom="5.0" left="10.0" right="10.0" top="30.0" />
+                    </VBox.margin>
+                    <font>
+                        <Font name="System Bold" size="12.0" />
+                    </font>
+                    <cursor>
+                        <Cursor fx:constant="HAND" />
+                    </cursor>
+                </Button>
+                <HBox prefHeight="36.0" prefWidth="619.0">
+                    <children>
+                        <TextField fx:id="numberOfSectorsField" prefHeight="26.0" prefWidth="118.0" promptText="Number of sectors" style="-fx-background-color: transparent; -fx-border-color: #ffebcd; -fx-border-radius: 10;">
+                            <HBox.margin>
+                                <Insets top="10.0" />
+                            </HBox.margin>
+                        </TextField>
+                        <Button fx:id="pixelateButton" mnemonicParsing="false" onAction="#pixelate" prefHeight="26.0" prefWidth="549.0" style="-fx-background-color: transparent;  -fx-border-color: #ffebcd; -fx-border-radius: 10;" text="Pixelate" textFill="#ffebcd">
+                            <HBox.margin>
+                                <Insets bottom="10.0" left="10.0" top="10.0" />
+                            </HBox.margin>
+                            <font>
+                                <Font name="System Bold" size="12.0" />
+                            </font>
+                            <cursor>
+                                <Cursor fx:constant="HAND" />
+                            </cursor>
+                        </Button>
+                    </children>
+                    <VBox.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" />
+                    </VBox.margin>
+                </HBox>
+            </children>
+        </VBox>
+    </bottom>
     <left>
-        <ImageView fitHeight="155.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
-            <BorderPane.margin>
-                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-            </BorderPane.margin>
-        </ImageView>
+        <VBox fx:id="vBoxBefore" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+            <children>
+                <Label text="Before:" textFill="#ffebcd">
+                    <VBox.margin>
+                        <Insets left="10.0" right="10.0" top="10.0" />
+                    </VBox.margin>
+                </Label>
+                <ImageView fx:id="beforeImageView" fitHeight="275.0" fitWidth="320.0" pickOnBounds="true" preserveRatio="true">
+                    <VBox.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                    </VBox.margin>
+                </ImageView>
+            </children>
+        </VBox>
     </left>
     <right>
-        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
-            <BorderPane.margin>
-                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-            </BorderPane.margin>
-        </ImageView>
+        <VBox fx:id="vBoxAfter" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+            <children>
+                <Label text="After:" textFill="#ffebcd">
+                    <VBox.margin>
+                        <Insets left="10.0" right="10.0" top="10.0" />
+                    </VBox.margin>
+                </Label>
+                <ImageView fx:id="afterImageView" fitHeight="275.0" fitWidth="320.0" pickOnBounds="true" preserveRatio="true">
+                    <VBox.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                    </VBox.margin>
+                </ImageView>
+            </children>
+        </VBox>
     </right>
 </BorderPane>
