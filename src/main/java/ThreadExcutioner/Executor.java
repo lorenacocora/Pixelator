@@ -24,7 +24,7 @@ public class Executor {
 
         //Instantiation of threads (objects)
         //This classes / objects are just an example.
-        PixelatorExecutor pixExec = new PixelatorExecutor(image, sections);
+        PixelatorExecutor pixExec = new PixelatorExecutor(this.image, this.sections);
 
         //Thread Start (starts executing threads)
         pixExec.start();
@@ -33,7 +33,7 @@ public class Executor {
         pixExec.join();
 
         //Create and execute last Thread for merging into a final image
-        mergeImg imageMerged = new mergeImg(image, pixExec.getSectionWidth(), pixExec.getSectionHeight(), pixExec.getTotalSections(), pixExec.getSections());
+        mergeImg imageMerged = new mergeImg(this.image, pixExec.getSectionWidth(), pixExec.getSectionHeight(), pixExec.getTotalSections(), pixExec.getSections());
         imageMerged.start();
         imageMerged.join();
 

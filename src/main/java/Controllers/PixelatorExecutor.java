@@ -18,25 +18,33 @@ public class PixelatorExecutor extends Thread {
     public PixelatorExecutor(BufferedImage image, int sections) throws InterruptedException {
        this.image = image;
        this.totalSections = sections;
-       pixelate();
+       this.sections = new int[totalSections][totalSections][3];
     }
 
-    public void pixelate() throws InterruptedException {
+    public void run() {
         sectionWidth = image.getWidth() / totalSections;
         sectionHeight = image.getHeight() / totalSections;
-        sections = new int[totalSections][totalSections][3];
+
         int cores = Runtime.getRuntime().availableProcessors();
         PixelatorThread[] threads = new PixelatorThread[cores];
 
         // Create a thread for each core
         for (int i = 0; i < cores; i++) {
             threads[i] = new PixelatorThread(image, sectionWidth, sectionHeight, totalSections, sections);
+            // Make sure the thread static variables have been reset
+            if (i == 0) {
+                threads[i].reset();
+            }
             threads[i].start();
         }
 
         // Wait for all threads to finish
         for (PixelatorThread thread : threads) {
-            thread.join();
+            try {
+                thread.join();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
     }
 

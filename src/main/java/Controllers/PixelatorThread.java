@@ -25,6 +25,11 @@ public class PixelatorThread extends Thread {
         this.sections = sections;
     }
 
+    public void reset() {
+        lastX = -1;
+        lastY = 0;
+    }
+
     public void run() {
         int currentX = -1;
         int currentY = 0;
