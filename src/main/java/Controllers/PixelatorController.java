@@ -11,6 +11,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import sun.security.validator.ValidatorException;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -62,7 +63,12 @@ public class PixelatorController {
             if(file!=null)
             {
                 FileInputStream stream = new FileInputStream(file.getAbsoluteFile());
-                beforeImageView.setImage(new Image(stream));
+                Image image = new Image(stream);
+                if(image.getHeight()<400 || image.getHeight()>1000)
+                    throw new ValidatorException("The height should be over 400 and under 1000 pixels!");
+                if(image.getWidth()<400 || image.getWidth()>1000)
+                    throw new ValidatorException("The width should be over 400 and under 1000 pixels!");
+                beforeImageView.setImage(image);
                 beforeImageView.setFitWidth(320);
                 try {
                     result = ImageIO.read(file);
@@ -74,6 +80,13 @@ public class PixelatorController {
             Alert message = new Alert(Alert.AlertType.ERROR);
             message.setTitle("Error");
             message.setContentText(e.getMessage());
+            message.showAndWait();
+        }
+        catch (ValidatorException ve)
+        {
+            Alert message = new Alert(Alert.AlertType.ERROR);
+            message.setTitle("Error");
+            message.setContentText(ve.getMessage());
             message.showAndWait();
         }
     }
